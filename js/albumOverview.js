@@ -128,7 +128,7 @@ class AlbumOverview {
         // attach an event listener to the slider
         vis.slider.noUiSlider.on('slide', function (values, handle) {
             vis.plottype = d3.select("#plot-type").property("value");
-            vis.updateFilters(vis.displayData, values)
+            vis.updateFilters(vis.data, values)
 
 
         });
@@ -136,7 +136,7 @@ class AlbumOverview {
         // Listen for changes in rank selector
         d3.select("#plot-type").on("change", function () {
             vis.plottype = d3.select("#plot-type").property("value");
-            vis.updateFilters(vis.displayData, vis.slider.noUiSlider.get());
+            vis.updateFilters(vis.data, vis.slider.noUiSlider.get());
 
         })
 
