@@ -6,8 +6,11 @@
 
 // load data using promises
 let promises = [
-    d3.csv("data/BeatlesAlbumCoverPalettes.csv")
+    d3.csv("data/BeatlesAlbumCoverPalettes.csv"),
+    d3.csv("data/TheBeatlesCleaned.csv")
 ];
+
+let overviewVis;
 
 Promise.all(promises)
     .then(function (data) {
@@ -24,6 +27,7 @@ function initMainPage(dataArray) {
     console.log('check out the data', dataArray);
 
     // init visualizations
+    overviewVis = new AlbumOverview('visTwo', dataArray[1]);
 
 }
 
