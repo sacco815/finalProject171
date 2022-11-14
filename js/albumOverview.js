@@ -167,7 +167,7 @@ class AlbumOverview {
             .append("circle")
             .attr("class", "track")
             // .on("mouseover", function(event, d) {
-            //     d.showEdition(d);
+            //     vis.showEdition(d);
             // })
             .merge(circles)
             .transition()
