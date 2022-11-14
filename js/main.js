@@ -4,6 +4,7 @@
 
 // init global variables & switches
 let albumVis;
+let overviewVis;
 
 // load data using promises
 let promises = [
