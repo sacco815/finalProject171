@@ -7,7 +7,8 @@ let albumVis;
 
 // load data using promises
 let promises = [
-    d3.csv("data/BeatlesAlbumCoverPalettes.csv")
+    d3.csv("data/BeatlesAlbumCoverPalettes.csv"),
+    d3.csv("data/TheBeatlesCleaned.csv")
 ];
 
 Promise.all(promises)
