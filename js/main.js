@@ -3,6 +3,7 @@
 * * * * * * * * * * * * * */
 
 // init global variables & switches
+let albumVis;
 
 // load data using promises
 let promises = [
@@ -24,6 +25,7 @@ function initMainPage(dataArray) {
     console.log('check out the data', dataArray);
 
     // init visualizations
+    albumVis = new AlbumVis('visOne', dataArray[0]);
 
 }
 
