@@ -9,6 +9,8 @@
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.css" integrity="sha512-DGB74Gyw93qON+V0QxSRs1er6sqoPyFoy23HBL5LN7MRJBcjeCU22zega+vOEGE0XQLoVrv4ExcaesSTwZQA2w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
 
     <link rel="stylesheet" href="css/styles.css" />
   </head>
@@ -37,19 +39,66 @@
 
           <div
             class="row"
-            style="height: 70vh; background: #bdbdbd; padding: 0"
+            style="padding: 0"
           >
-            <div
-              class="col"
-              style="
-                border: thin solid grey;
-                border-radius: 5px;
-                background: rgba(64, 64, 64, 0.4);
-              "
-            >
-              <div id="visTwo"></div>
+             <div class="row" style="padding: 10vh;">
+
+
+
+                        <div class="form-group">
+                            <!-- Select box to choose the ranking type -->
+                            <select class="form-control" id="plot-type">
+                                <option value="tracks">Tracks</option>
+                                <option value="streams">Streams</option>
+                            </select>
+
+                        </div>
+                        <div>
+
+                            <label for="time-period-slider" class="range-slider-value" id="lowerlabel">1963</label>
+                            <div class="slider-styled" id="time-period-slider"></div>
+                            <label for="time-period-slider" class="range-slider-value" id="upperlabel">1970</label>
+
+                            <!--                            <input type="range" class="form-range" id="time-period-slider">-->
+
+
+                        </div>
+
+
+                    <div id="visTwo"></div>
+
+                <div class="card" id="albumdetail">
+
+                    <div id="image-spot" style="text-align:center"><img></div>
+                    <h3 id="detailTitle" style="padding-top:0.1em"><p id="placeholder"><i>--Make a selection to see details--</i></p></h3>
+                    <table class="table table-striped sortable align-self-center" style="padding: 10px; width: 200px; border-color: #91988B; border-width: 2px">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="detailHeader">Released: </td>
+                            <td id="detailDate"></td>
+                        </tr>
+                        <tr>
+                            <td class="detailHeader">Track: </td>
+                            <td id="detailTrack"></td>
+                        </tr>
+                        <tr>
+                            <td class="detailHeader">Grammys: </td>
+                            <td id="detailGrammys"></td>
+                        </tr>
+                        <tr>
+                            <td class="detailHeader">Streams: </td>
+                            <td id="detailStreams"></td>
+                        </tr>
+
+
+                </div>
+
+
+
+
             </div>
-          </div>
 
           <div
             class="row"
@@ -96,6 +145,10 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.js"
+        integrity="sha512-mZXUH8DAODwCHioWP3gltQwa953LbABMlzTYwYkKqv8eNxOk37B1HgNNuCMfFxgrpW5C34WJbxPDcM58+s1dJA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <!-- d3 -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -110,5 +163,6 @@
     <!-- <script src="js/main.js"></script> -->
     <script src="js/johnVsLennon.js"></script>
     <script src="js/albumVis.js"></script>
+    <script src="js/albumOverview.js"></script>
   </body>
 </html>
