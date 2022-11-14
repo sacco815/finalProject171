@@ -26,6 +26,7 @@ function initMainPage(dataArray) {
 
     // init visualizations
     albumVis = new AlbumVis('visOne', dataArray[0]);
+    overviewVis = new AlbumOverview('visTwo', dataArray[1]);
 
 }
 
