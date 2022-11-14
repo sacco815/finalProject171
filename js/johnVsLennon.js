@@ -1,14 +1,14 @@
 // import composer.json
 
 // load data using promises
-let promises = [
+let promises2 = [
   d3.csv(
     "https://raw.githubusercontent.com/wahlforss/blaj/main/beatles_tracks_expanded.csv"
   ),
   d3.csv("https://raw.githubusercontent.com/wahlforss/blaj/main/composer.csv"),
 ];
 
-Promise.all(promises)
+Promise.all(promises2)
   .then(function (data) {
     JohnVPaul(data);
   })
@@ -24,8 +24,6 @@ function JohnVPaul(data) {
 
   // parse Album data in expandend
   expanded = expanded.map((d) => {
-    console.log(d);
-
     d.album = d.album.replaceAll("'", '"');
     try {
       d.album = JSON.parse(d.album);
@@ -54,14 +52,12 @@ function JohnVPaul(data) {
 
   // filter out songs with no data
   const filtered = composerWithExpanded.filter((d) => d.name !== undefined);
-  console.log(filtered.length, composer.length, filtered);
 
   const PaulSongs = filtered.filter((d) => d[1] === "McCartney");
   const JohnSongs = filtered.filter((d) => d[1] === "Lennon");
 
   const averagePopularityPaul = d3.mean(PaulSongs, (d) => +d.popularity);
   const averagePopularityJohn = d3.mean(JohnSongs, (d) => +d.popularity);
-  console.log(averagePopularityPaul, averagePopularityJohn);
   const averageDurationPaul = d3.mean(PaulSongs, (d) => +d.duration_ms);
   const averageDurationJohn = d3.mean(JohnSongs, (d) => +d.duration_ms);
 
