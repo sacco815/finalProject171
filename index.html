@@ -18,93 +18,66 @@
     <!-- WRAPPER -->
     <div class="container-fluid" style="height: 100vh; padding-top: 1vh">
       <div class="row">
-        <div
-          class="col-10 offset-1"
-          style="border: thin solid grey; border-radius: 5px"
-        >
+        <div class="col-10 offset-1">
           <!-- HEADING -->
-          <div
-            class="row d-flex justify-content-center"
-            style="height: 10vh; padding: 0; background: #bdbdbd"
-          >
+          <div class="row d-flex justify-content-center" style="height: 15vh; padding: 10px">
             <div class="align-self-center">
               <h1 id="title-header">A Look Into The Beatles</h1>
             </div>
           </div>
-            <!-- CONTENT -->
-            <div class="row" style="height: 70vh; background: #bdbdbd; padding: 0;">
-                <div id="visOne" style="height: 100%; width:100%;"></div>
-            </div>
-          
+          <!-- CONTENT -->
+          <div class="row" style="height: 70vh; padding: 0;">
+              <div id="visOne" style="height: 100%; width:100%;"></div>
+          </div>
+          <div class="row">
             <div id="visThree"></div>
-
-             <div class="row" style="padding: 10vh;">
-
-                  <div class="col-6" style="display: contents">
-
-                        <div class="form-group">
-                            <!-- Select box to choose the ranking type -->
-                            <select class="form-control" id="plot-type">
-                                <option value="tracks">Tracks</option>
-                                <option value="streams">Streams</option>
-                            </select>
-
-                        </div>
-                        <div>
-
-                            <label for="time-period-slider" class="range-slider-value" id="lowerlabel">1963</label>
-                            <div class="slider-styled" id="time-period-slider"></div>
-                            <label for="time-period-slider" class="range-slider-value" id="upperlabel">1970</label>
-
-                            <!--                            <input type="range" class="form-range" id="time-period-slider">-->
-
-
-                        </div>
-
-
-                    <div id="visTwo"></div>
-                    
-               </div>
-                
-                <div class="card" id="albumdetail">
-
-                    <div id="image-spot" style="text-align:center"><img></div>
-                    <h3 id="detailTitle" style="padding-top:0.1em"><p id="placeholder"><i>--Make a selection to see details--</i></p></h3>
-                    <table class="table table-striped sortable align-self-center" style="padding: 10px; width: 200px; border-color: #91988B; border-width: 2px">
-                        <thead>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="detailHeader">Released: </td>
-                            <td id="detailDate"></td>
-                        </tr>
-                        <tr>
-                            <td class="detailHeader">Track: </td>
-                            <td id="detailTrack"></td>
-                        </tr>
-                        <tr>
-                            <td class="detailHeader">Grammys: </td>
-                            <td id="detailGrammys"></td>
-                        </tr>
-                        <tr>
-                            <td class="detailHeader">Streams: </td>
-                            <td id="detailStreams"></td>
-                        </tr>
-                </div>            
+          </div>
+          <div class="row" style="padding: 10vh;">
+            <div class="col-6" style="display: contents">
+              <div class="form-group">
+                <!-- Select box to choose the ranking type -->
+                <select class="form-control" id="plot-type">
+                    <option value="tracks">Tracks</option>
+                    <option value="streams">Streams</option>
+                </select>
+              </div>
+              <div>
+                  <label for="time-period-slider" class="range-slider-value" id="lowerlabel">1963</label>
+                  <div class="slider-styled" id="time-period-slider"></div>
+                  <label for="time-period-slider" class="range-slider-value" id="upperlabel">1970</label>
+                  <!--                            <input type="range" class="form-range" id="time-period-slider">-->
+              </div>
+              <div id="visTwo"></div>
             </div>
-            
-          <div
-          class="row"
-          style="padding: 10vh"
-        >
-          
-        
+            <div class="card" id="albumdetail">
+                <div id="image-spot" style="text-align:center"><img></div>
+                <h3 id="detailTitle" style="padding-top:0.1em"><p id="placeholder"><i>--Make a selection to see details--</i></p></h3>
+                <table class="table table-striped sortable align-self-center" style="padding: 10px; width: 200px; border-color: #91988B; border-width: 2px">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="detailHeader">Released: </td>
+                        <td id="detailDate"></td>
+                    </tr>
+                    <tr>
+                        <td class="detailHeader">Track: </td>
+                        <td id="detailTrack"></td>
+                    </tr>
+                    <tr>
+                        <td class="detailHeader">Grammys: </td>
+                        <td id="detailGrammys"></td>
+                    </tr>
+                    <tr>
+                        <td class="detailHeader">Streams: </td>
+                        <td id="detailStreams"></td>
+                    </tr>
+            </div>            
+          </div>
         </div>
+      </div>
 
-
-
-
-    <!-- - - - - - - - - - - - >
+<!-- - - - - - - - - - - - >
 <    Load JS libraries     >
 <- - - - - - - - - - - - -->
 
