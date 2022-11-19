@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -33,7 +33,6 @@
             <div id="visThree"></div>
           </div>
           <div class="row" style="padding: 10vh;">
-            <div class="col-6" style="display: contents">
               <div class="form-group">
                 <!-- Select box to choose the ranking type -->
                 <select class="form-control" id="plot-type">
@@ -47,9 +46,13 @@
                   <label for="time-period-slider" class="range-slider-value" id="upperlabel">1970</label>
                   <!--                            <input type="range" class="form-range" id="time-period-slider">-->
               </div>
+
+
+              <div class="col-6" style="display: contents">
+                  <div class="row">
               <div id="visTwo"></div>
-            </div>
-            <div class="card" id="albumdetail">
+
+                <div class="card" id="albumdetail" style="display: block">
                 <div id="image-spot" style="text-align:center"><img></div>
                 <h3 id="detailTitle" style="padding-top:0.1em"><p id="placeholder"><i>--Make a selection to see details--</i></p></h3>
                 <table class="table table-striped sortable align-self-center" style="padding: 10px; width: 200px; border-color: #91988B; border-width: 2px">
@@ -72,7 +75,7 @@
                         <td class="detailHeader">Streams: </td>
                         <td id="detailStreams"></td>
                     </tr>
-            </div>            
+            </div></div></div>
           </div>
         </div>
       </div>
