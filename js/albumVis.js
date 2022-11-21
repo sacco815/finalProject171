@@ -84,6 +84,7 @@ class AlbumVis {
             .data(vis.albumData);
         
         vis.albumText.enter().append("text")
+            .attr("class", "alb-text")
             .attr("x", d => (vis.xScale(parseInt(d.place)) + 50) + 75)
             .attr("y", function(d, i) {
                 if (i < 6) {
@@ -114,6 +115,7 @@ class AlbumVis {
             .data(vis.albumData);
 
         vis.yearText.enter().append("text")
+            .attr("class", "alb-text")
             .attr("x", d => (vis.xScale(parseInt(d.place)) + 50) + 75)
             .attr("y", function(d, i) {
                 if (i < 6) {
@@ -171,13 +173,37 @@ class AlbumVis {
         d3.select(".row")
             .style("background-color", hexValues[1]);
 
+        d3.selectAll("h2")
+            .style("color", hexValues[2]);
+
+        d3.selectAll("h3")
+            .style("color", hexValues[3]);
+
+        d3.selectAll("p")
+            .style("color", hexValues[4]);
+
+        d3.selectAll(".alb-text")
+            .style("fill", hexValues[4]);
+
+        d3.selectAll(".axis text")
+            .style("fill", hexValues[4]);
+
+        d3.selectAll(".axis line")
+            .style("stroke", hexValues[4])
+
+        d3.selectAll(".axis path")
+            .style("stroke", hexValues[4])
+
+        d3.selectAll("svg text")
+            .style("fill", hexValues[4]);
+
         // create palette at bottom of svg of all hex colors on selected album
         vis.paletteRect = vis.svg.selectAll(".palette-rect")
             .data(hexValues);
         
         vis.paletteRect.enter().append("rect")
             .attr("x", (d, i) => (vis.width / 2) - 40 + (i*25))
-            .attr("y", vis.height - 25)
+            .attr("y", vis.height - 250)
             .attr("width", 25)
             .attr("height", 25)
             .attr("fill", d => d);
