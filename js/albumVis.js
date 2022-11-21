@@ -1,10 +1,11 @@
 /* * * * * * * * * * * * * *
-*      class AlbumVis      *
-* * * * * * * * * * * * * */
+ *      class AlbumVis      *
+ * * * * * * * * * * * * * */
 
+let albumClicked = "";
+let albumHex = [];
 
 class AlbumVis {
-
     constructor(parentElement, albumData) {
         this.parentElement = parentElement;
         this.albumData = albumData;
@@ -107,6 +108,9 @@ class AlbumVis {
                     .style("font-size", "11px")
             })
             .on("click", function(event, d) {
+                console.log(d, "clicked");
+                albumClicked = d.album;
+                johnvsPaul.updateVis();
                 vis.updatePalette(d)
             });
 
@@ -163,6 +167,7 @@ class AlbumVis {
 
         // grab hex values in an array from album hex string
         let hexValues = d.hexValues.split(",");
+        albumHex = hexValues;
         console.log(hexValues);
     
         // update title page to first color
