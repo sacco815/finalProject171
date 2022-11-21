@@ -77,6 +77,9 @@ class AlbumVis {
                     .attr("opacity", 0)
             })
             .on("click", function(event, d) {
+                console.log(d, "clicked");
+                albumClicked = d.album;
+                johnvsPaul.updateVis();
                 vis.updatePalette(d)
             });
 
@@ -142,6 +145,9 @@ class AlbumVis {
                     .style("font-size", "11px")
             })
             .on("click", function(event, d) {
+                console.log(d, "clicked");
+                albumClicked = d.album;
+                johnvsPaul.updateVis();
                 vis.updatePalette(d)
             });
 
