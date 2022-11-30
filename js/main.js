@@ -9,10 +9,10 @@ let overviewVis;
 // load data using promises
 let promises = [
   d3.csv(
-     "data/BeatlesAlbumCoverPalettes.csv"
+    "https://raw.githubusercontent.com/wahlforss/blaj/main/BeatlesAlbumCoverPalettes.csv"
   ),
   d3.csv(
-    "data/TheBeatlesCleaned.csv"
+    "https://raw.githubusercontent.com/wahlforss/blaj/main/TheBeatlesCleaned.csv"
   ),
 ];
 
