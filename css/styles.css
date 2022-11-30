@@ -42,7 +42,7 @@ h2 {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   margin-bottom: 24px;
   color: #0d0d23;
@@ -57,6 +57,11 @@ row {
 img {
   width: 100px;
   padding: 10px;
+}
+
+img2 {
+  background-image: url("../img/beatles.png");
+
 }
 
 td {

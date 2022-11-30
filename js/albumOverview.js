@@ -230,10 +230,10 @@ class AlbumOverview {
         .style("visibility", "hidden");
 
     // Render selected album image
-    d3.select("img")
+    d3.select("#albumcover")
         .attr("src", "img/" + d.image)
         .attr("width", 800)
-        .attr("id", "detailImage");
+        .attr("class", "detailImage");
 
 
     // Render detailed stats into table
