@@ -94,8 +94,8 @@ class AlbumOverview {
             row.year = vis.parseDate(row.year);
             // row.album = +row.album;
             row.tracks = +row.trackNum;
-            row.grammys = +row.acousticness;
-            row.streams = +row.duration_ms;
+            row.track_number = +row.track_number;
+            row.popularity = +row.popularity;
             row.song = row.song.toString();
         })
 
@@ -108,7 +108,7 @@ class AlbumOverview {
         // Set default load state
         vis.xscale.domain([d3.min(vis.displayData.map(d => d.year)), d3.max(vis.displayData.map(d => d.year))]);
         vis.yscale.domain([0, d3.max(vis.displayData.map(d => d.tracks))]);
-        vis.durationScale.domain([0, d3.max(vis.displayData.map(d => (d.streams / 60000)))]);
+        vis.durationScale.domain([0, d3.max(vis.displayData.map(d => (d.popularity)))]);
         vis.color.domain([vis.displayData.map(d => d.album)])
 
     // define slider functionality - notice that you need to provide the slider's location
@@ -173,7 +173,8 @@ class AlbumOverview {
             .transition()
             .duration(800)
             .attr("fill", d=>vis.color(d.album))
-            .attr("r", d => vis.durationScale(d.streams/60000))
+            // .attr("r", d => vis.durationScale(d.popularity))
+            .attr("r", d=> +d.popularity/5)
             .attr("cx", d => vis.xscale(d.year))
             .attr("cy", d => vis.yscale(d[plottype]));
 
@@ -190,8 +191,8 @@ class AlbumOverview {
         if (plottype === "tracks") {
             plottypelabel = "Number of Tracks";
         }
-        else if (plottype === "streams") {
-            plottypelabel = "Total Streams To Date";
+        else if (plottype === "popularity") {
+            plottypelabel = "Total Popularity To Date";
         }
         else { plottypelabel = plottype; }
 
@@ -240,8 +241,8 @@ class AlbumOverview {
     this.addElement("detailTitle", d.album.toString());
     this.addElement("detailDate", d3.timeFormat("%Y")(d.year));
     this.addElement("detailTrack",d.song.toString());
-    this.addElement("detailGrammys", d.grammys);
-    this.addElement("detailStreams", d.streams);
+    this.addElement("detailTrackNum", d.track_number);
+    this.addElement("detailPop", d.popularity);
 
     }
 
