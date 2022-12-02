@@ -43,18 +43,20 @@ class AlbumOverview {
         // Axes
         vis.xAxis = d3.axisBottom();
         vis.xAxis.scale(vis.xscale)
-            .tickFormat(vis.formatDate);
+            .tickFormat(vis.formatDate)
+            .ticks(3);
 
-        vis.yAxis = d3.axisRight();
+        vis.yAxis = d3.axisLeft();
         vis.yAxis.scale(vis.yscale);
 
         vis.xAxisGroup = vis.svg.append("g").attr("class", "axis x-axis")
-            .attr("transform", "translate(0," + (vis.height) + ")");
+            .attr("transform", "translate(0," + (vis.height +10) + ")");
 
-        vis.yAxisGroup = vis.svg.append("g").attr("class", "axis y-axis");
+        vis.yAxisGroup = vis.svg.append("g").attr("class", "axis y-axis")
+            .attr("transform", "translate(-30,0)");
 
         vis.svg.append("text")
-            .attr("transform", "translate(" + (vis.width - 30) + " ," + (vis.height - 10) + ")")
+            .attr("transform", "translate(" + (vis.width - 25) + " ," + (vis.height - 10) + ")")
             .style("text-anchor", "middle")
             .text("Year");
 
@@ -192,7 +194,7 @@ class AlbumOverview {
             plottypelabel = "Number of Tracks";
         }
         else if (plottype === "popularity") {
-            plottypelabel = "Total Popularity To Date";
+            plottypelabel = "Popularity To Date";
         }
         else { plottypelabel = plottype; }
 
@@ -200,15 +202,15 @@ class AlbumOverview {
         // Update axis label for y axis
         vis.svg.select("#yaxislabel")
             .attr("transform","rotate(-90)")
-            .attr("y", -30)
-            .attr("x", 350-vis.height)
+            .attr("y", -10)
+            .attr("x", 80-vis.height)
             .attr("dy", "1em")
             .style("text-anchor", "middle")
             .text(plottypelabel);
 
         // Update chart title
         vis.svg.select("#chartTitle")
-            .attr("transform","translate(" + (vis.width/2) + " ," + (0) + ")")
+            .attr("transform","translate(" + (vis.width/2) + " ," + (-20) + ")")
             .style("text-anchor", "middle")
             .text(plottypelabel + " By Year");
 
