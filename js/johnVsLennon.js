@@ -321,10 +321,10 @@ class JvP {
       .text("John Lennon");
 
     // add title : click on the image to see the top 10 songs
-    const g2 = svg.append("g").attr("transform", "translate(0, 300)");
+    const g2 = svg.append("g").attr("transform", "translate(0, 350)");
     g.append("text")
       .attr("x", 50)
-      .attr("y", 180)
+      .attr("y", 170)
       .attr("dy", ".75em")
       .text("Click on the image to see the top 10 songs");
     const top10Paul = this.paulSongs
@@ -356,9 +356,17 @@ class JvP {
       .attr("height", 200)
       .attr("x", 0)
       .attr("y", 200)
+      .attr("opacity", 0.9)
+      // make brighter when hovering
+      .on("mouseover", function () {
+        d3.select(this).attr("opacity", 1);
+      })
+      .on("mouseout", function () {
+        d3.select(this).attr("opacity", 0.9);
+      })
       .on("click", () => {
         this.showTable(top10Paul);
-        this.wordCloud(allSongsPaul, g2);
+        this.wordCloud(allSongsPaul, g2, "Paul");
       });
 
     g.append("image")
@@ -367,9 +375,18 @@ class JvP {
       .attr("height", 200)
       .attr("x", 200)
       .attr("y", 200)
+      // attr opacity
+      .attr("opacity", 0.9)
+      // make brighter when hovering
+      .on("mouseover", function () {
+        d3.select(this).attr("opacity", 1);
+      })
+      .on("mouseout", function () {
+        d3.select(this).attr("opacity", 0.9);
+      })
       .on("click", () => {
         this.showTable(top10John);
-        this.wordCloud(allSongsJohn, g2);
+        this.wordCloud(allSongsJohn, g2, "John");
       });
     // top 10 songs by paul
 
@@ -379,9 +396,16 @@ class JvP {
     console.log(allSongsPaul);
   }
 
-  wordCloud(myWords, g2) {
+  wordCloud(myWords, g2, name) {
     // CLEAR G2
     g2.selectAll("*").remove();
+    // add title to word cloud : top songs by Paul
+    g2.append("text")
+      // position above the word cloud
+      .attr("x", 50)
+      .attr("y", 300)
+      .attr("dy", ".75em")
+      .text(`Top songs by ${name}`);
 
     // clear the word cloud
     console.log(myWords);
@@ -427,9 +451,20 @@ class JvP {
         .selectAll("text")
         .data(words)
         .enter()
+        // on hover color changes
         .append("text")
         .style("font-size", function (d) {
           return d.size + "px";
+        })
+        .on("mouseover", function (d) {
+          d3.select(this).style("fill", albumHex[albumHex.length - 1] || "red");
+          // larger
+          d3.select(this).style("font-size", "20px");
+        })
+        .on("mouseout", function (d) {
+          d3.select(this).style("fill", "black");
+          // smaller
+          d3.select(this).style("font-size", "10px");
         })
         .attr("text-anchor", "middle")
         .attr("transform", function (d) {
