@@ -193,6 +193,9 @@ class AlbumVis {
         d3.selectAll("p")
             .style("color", hexValues[4]);
 
+        d3.selectAll("table")
+            .style("color", hexValues[4]);
+
         d3.selectAll(".alb-text")
             .style("fill", hexValues[4]);
 
@@ -208,13 +211,16 @@ class AlbumVis {
         d3.selectAll("svg text")
             .style("fill", hexValues[4]);
 
+        d3.selectAll("svg g text")
+            .style("fill", hexValues[4]);
+
         // create palette at bottom of svg of all hex colors on selected album
         vis.paletteRect = vis.svg.selectAll(".palette-rect")
             .data(hexValues);
         
         vis.paletteRect.enter().append("rect")
             .attr("x", (d, i) => (vis.width / 2) - 40 + (i*25))
-            .attr("y", vis.height - 250)
+            .attr("y", vis.height - 25)
             .attr("width", 25)
             .attr("height", 25)
             .attr("fill", d => d);

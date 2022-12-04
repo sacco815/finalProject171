@@ -11,7 +11,7 @@ class AlbumOverview {
         this.parseDate = d3.timeParse("%Y"); // Returns: Wed Jan 01 2020 00:00:00 GMT-0500 (EST)
         this.durationScale = d3.scaleLinear().domain([0, 0]).range([0, 20]);
 // let color = d3.scaleLinear().range(["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]);
-        this.color = d3.scaleOrdinal().range(["goldenrod", "darkorange", "peachpuff", "lightpink", "navy", "royalblue", "teal", "mediumseagreen", "yellowgreen", "mediumvioletred", "rosybrown", "lightskyblue", "forestgreen"]);
+        this.color = d3.scaleOrdinal().range(["#EE1C25", "#010101", "#444141", "#C5C5C7", "#8B868D", "#C75401", "#454545", "#E8E644", "#5A5A5A", "#8671A4", "#DBD6BE", "#6C8484", "forestgreen"]);
 
 
         console.log("DATA: " + data)
