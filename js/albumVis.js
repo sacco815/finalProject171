@@ -184,6 +184,7 @@ class AlbumVis {
     // update row background to second color
     d3.select(".row").style("background-color", hexValues[1]);
 
+    // update the page's color scheme
     d3.selectAll("h2").style("color", hexValues[2]);
 
     d3.selectAll("h3").style("color", hexValues[3]);
