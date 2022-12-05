@@ -92,6 +92,10 @@ class JvP {
   initVis() {
     let svg = this.svg;
     console.log("init vis");
+    // remove class hidden from  div wrapper-viz-4
+    d3.select("#wrapper-viz-4").classed("hidden", false);
+    // reset svg 2
+    this.svg2.selectAll("*").remove();
 
     if (albumClicked) {
       // add a text that says filtered by clicked alubm
@@ -102,12 +106,21 @@ class JvP {
         .text("Filtered by album: " + albumClicked)
         .attr("font-size", "18px");
     }
+    console.log(this.composerWithExpanded);
     // filter out songs with no data
     const filtered = this.composerWithExpanded.filter((d) => {
       if (albumClicked === "") {
         return d.name !== undefined;
       } else {
-        console.log(d.album);
+        const isTrue =
+          d &&
+          d.name !== undefined &&
+          d.album &&
+          d.album.name &&
+          d.album.name.includes(albumClicked);
+        if (isTrue) {
+          console.log(d.album, albumClicked, "d.album.name === albumClicked");
+        }
         return (
           d &&
           d.name !== undefined &&
@@ -117,9 +130,16 @@ class JvP {
         );
       }
     });
-    console.log(albumHex);
+
     const PaulSongs = filtered.filter((d) => d[1] === "McCartney");
     const JohnSongs = filtered.filter((d) => d[1] === "Lennon");
+    console.log(PaulSongs, JohnSongs, "PaulSongs, JohnSongs");
+    if (!(PaulSongs.length > 0 && JohnSongs.length > 0)) {
+      // add class hidden to div wrapper-viz-4
+      d3.select("#wrapper-viz-4").classed("hidden", true);
+      console.log("no data");
+      return;
+    }
 
     this.paulSongs = PaulSongs;
     this.johnSongs = JohnSongs;
@@ -154,7 +174,6 @@ class JvP {
       .range([0, barHeight]);
 
     const barWrapper = svg.append("g").attr("transform", "translate(100, 100)");
-    console.log(barWrapper);
 
     const bar = barWrapper
       .selectAll("g")
@@ -221,7 +240,6 @@ class JvP {
       { name: "Paul", value: numberOfSongsPaul },
       { name: "John", value: numberOfSongsJohn },
     ];
-    console.log(numberOfSongsPaul, numberOfSongsJohn);
 
     const pieScale = d3
       .scaleLinear()
@@ -407,11 +425,6 @@ class JvP {
         this.wordCloud(allSongsJohn, g2, "John");
       });
     // top 10 songs by paul
-
-    console.log(top10John);
-    // all songs by paul
-
-    console.log(allSongsPaul);
   }
 
   wordCloud(myWords, g2, name) {
@@ -426,7 +439,6 @@ class JvP {
       .text(`Top songs by ${name} (size = popularity)`);
 
     // clear the word cloud
-    console.log(myWords);
 
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 0, bottom: 10, left: 0 },
@@ -442,14 +454,12 @@ class JvP {
     //           "translate(" + margin.left + "," + margin.top + ")");
 
     // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
-    console.log("YO");
+
     var layout = d3.layout
       .cloud()
       .size([width, height])
       .words(
         myWords.map(function (d) {
-          console.log("YO", d);
-          console.log(d);
           return { text: d.name, size: 10 };
         })
       )
@@ -472,10 +482,8 @@ class JvP {
         // on hover color changes
         .append("text")
         .style("font-size", function (d) {
-          console.log(d, "apa");
           const songName = d.text;
           const song = myWords.find((song) => song.name === songName);
-          console.log(song.popularity);
 
           return d.size * 0.5 + song.popularity * 0.1 + "px";
         })

@@ -2,6 +2,9 @@ body {
   font-family: Georgia, "Times New Roman", Times, serif;
   background-color: #ffffff;
 }
+.hidden {
+  display: none;
+}
 
 /*add more air in the table */
 
