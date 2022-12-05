@@ -5,6 +5,24 @@ body {
 
 /*add more air in the table */
 
+#visThree {
+  width: 100%;
+}
+
+.new-line {
+  display: block;
+  width: 100%;
+}
+
+#table {
+  /* make everything new line here */
+  display: block;
+  width: 100%;
+}
+p {
+  max-width: 1000px;
+}
+
 table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -47,7 +65,6 @@ h3 {
   margin-bottom: 24px;
   color: #0d0d23;
   font-style: italic;
-
 }
 
 row {
@@ -61,7 +78,6 @@ img {
 
 img2 {
   background-image: url("../img/beatles.png");
-
 }
 
 td {
@@ -99,8 +115,6 @@ h4 {
 .y-axis {
   font-size: 0.5em;
 }
-
-
 
 /***************/
 /*   DETAILS   */
@@ -201,7 +215,6 @@ h4 {
 .noUi-connect {
   background: #d8e6fc;
 }
-
 
 /*.col {*/
 /*  padding-left: 30px;*/

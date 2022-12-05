@@ -25,6 +25,7 @@ class JvP {
   constructor(data) {
     this.data = data;
     this.svg = null;
+    this.svg2 = null;
     this.composerWithExpanded = null;
     this.wrangleData();
     this.initVis();
@@ -42,7 +43,13 @@ class JvP {
       .select("#visThree")
       .append("svg")
       .attr("width", 1000)
-      .attr("height", 1100);
+      .attr("height", 250);
+
+    this.svg2 = d3
+      .select("#visFour")
+      .append("svg")
+      .attr("width", 2000)
+      .attr("height", 400);
 
     let data = this.data;
     let expanded = data[0];
@@ -85,6 +92,16 @@ class JvP {
   initVis() {
     let svg = this.svg;
     console.log("init vis");
+
+    if (albumClicked) {
+      // add a text that says filtered by clicked alubm
+      svg
+        .append("text")
+        .attr("x", 220)
+        .attr("y", 20)
+        .text("Filtered by album: " + albumClicked)
+        .attr("font-size", "18px");
+    }
     // filter out songs with no data
     const filtered = this.composerWithExpanded.filter((d) => {
       if (albumClicked === "") {
@@ -291,6 +308,7 @@ class JvP {
         }
         return "John Lennon";
       });
+
     this.setupAdvanced();
 
     // add text inside the pie chart
@@ -303,28 +321,28 @@ class JvP {
     const johnImage =
       "https://cdn.britannica.com/01/136501-050-D9110414/John-Lennon.jpg";
 
-    const svg = this.svg;
+    const svg = this.svg2;
 
     const g = svg.append("g").attr("transform", "translate(100, 100)");
 
     // add texts above pics
     g.append("text")
       .attr("x", 50)
-      .attr("y", 420)
+      .attr("y", 230)
       .attr("dy", ".75em")
       .text("Paul McCartney");
 
     g.append("text")
       .attr("x", 250)
-      .attr("y", 420)
+      .attr("y", 230)
       .attr("dy", ".75em")
       .text("John Lennon");
 
     // add title : click on the image to see the top 10 songs
-    const g2 = svg.append("g").attr("transform", "translate(0, 350)");
+    const g2 = svg.append("g").attr("transform", "translate(420, 100)");
     g.append("text")
       .attr("x", 50)
-      .attr("y", 170)
+      .attr("y", 0)
       .attr("dy", ".75em")
       .text("Click on the image to see the top 10 songs");
     const top10Paul = this.paulSongs
@@ -334,12 +352,12 @@ class JvP {
       .slice(0, 10);
 
     const allSongsPaul = this.paulSongs.map((song) => {
-      return song[0];
+      return { name: song[0], popularity: song.popularity };
     });
 
     // all songs by john
     const allSongsJohn = this.johnSongs.map((song) => {
-      return song[0];
+      return { name: song[0], popularity: song.popularity };
     });
 
     // top 10 songs by john
@@ -355,7 +373,7 @@ class JvP {
       .attr("width", 200)
       .attr("height", 200)
       .attr("x", 0)
-      .attr("y", 200)
+      .attr("y", 20)
       .attr("opacity", 0.9)
       // make brighter when hovering
       .on("mouseover", function () {
@@ -374,7 +392,7 @@ class JvP {
       .attr("width", 200)
       .attr("height", 200)
       .attr("x", 200)
-      .attr("y", 200)
+      .attr("y", 20)
       // attr opacity
       .attr("opacity", 0.9)
       // make brighter when hovering
@@ -402,10 +420,10 @@ class JvP {
     // add title to word cloud : top songs by Paul
     g2.append("text")
       // position above the word cloud
-      .attr("x", 50)
-      .attr("y", 300)
+      .attr("x", 500)
+      .attr("y", 0)
       .attr("dy", ".75em")
-      .text(`Top songs by ${name}`);
+      .text(`Top songs by ${name} (size = popularity)`);
 
     // clear the word cloud
     console.log(myWords);
@@ -413,7 +431,7 @@ class JvP {
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 0, bottom: 10, left: 0 },
       width = 1000 - margin.left - margin.right,
-      height = 1000 - margin.top - margin.bottom;
+      height = 300 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     // var svg = d3.select("#my_dataviz").append("svg")
@@ -432,7 +450,7 @@ class JvP {
         myWords.map(function (d) {
           console.log("YO", d);
           console.log(d);
-          return { text: d };
+          return { text: d.name, size: 10 };
         })
       )
       .padding(2)
@@ -454,17 +472,23 @@ class JvP {
         // on hover color changes
         .append("text")
         .style("font-size", function (d) {
-          return d.size + "px";
+          console.log(d, "apa");
+          const songName = d.text;
+          const song = myWords.find((song) => song.name === songName);
+          console.log(song.popularity);
+
+          return d.size * 0.5 + song.popularity * 0.1 + "px";
         })
         .on("mouseover", function (d) {
           d3.select(this).style("fill", albumHex[albumHex.length - 1] || "red");
           // larger
-          d3.select(this).style("font-size", "20px");
+          // bolder  text
+          d3.select(this).style("font-weight", "bold");
         })
         .on("mouseout", function (d) {
-          d3.select(this).style("fill", "black");
-          // smaller
-          d3.select(this).style("font-size", "10px");
+          d3.select(this).style("fill", "#0d0d23");
+          // not bold
+          d3.select(this).style("font-weight", "normal");
         })
         .attr("text-anchor", "middle")
         .attr("transform", function (d) {
@@ -478,40 +502,42 @@ class JvP {
 
   showTable(data) {
     // add table to the div
-
-    const table = d3.select("#table");
-    // reset table
-    table.html("");
-
-    // add table headers
-    // popularity duration_ms explicit (converted to mm ss) name
-    const headers = ["Song", "Artist", "Duration", "Popularity"];
-    const thead = table.append("thead");
-    const tbody = table.append("tbody");
-
-    thead
-      .append("tr")
-      .selectAll("th")
-      .data(headers)
-      .enter()
-      .append("th")
-      .text((d) => {
-        return d;
-      });
-
-    tbody
-      .selectAll("tr")
-      .data(data)
-      .enter()
-      .append("tr")
-      .html((d) => {
-        // popularity duration_ms explicit (converted to mm ss) name
-        // convert duration_ms to mm:ss
-        const duration = d.duration_ms / 1000;
-        const minutes = Math.floor(duration / 60);
-        const seconds = Math.floor(duration % 60);
-        return `<td>${d.name}</td><td>${d[1]}</td><td>${minutes}:${seconds}</td><td>${d.popularity}</td>`;
-      });
+    // const table = d3.select("#table");
+    // // reset table
+    // table.html("");
+    // // add table headers
+    // // popularity duration_ms explicit (converted to mm ss) name
+    // const headers = ["Song", "Artist", "Duration", "Popularity"];
+    // const thead = table.append("thead");
+    // const tbody = table.append("tbody");
+    // thead
+    //   .append("tr")
+    //   .selectAll("th")
+    //   .data(headers)
+    //   .enter()
+    //   .append("th")
+    //   .text((d) => {
+    //     return d;
+    //   });
+    // tbody
+    //   .selectAll("tr")
+    //   .data(data)
+    //   .enter()
+    //   .append("tr")
+    //   .html((d) => {
+    //     // popularity duration_ms explicit (converted to mm ss) name
+    //     // convert duration_ms to mm:ss
+    //     const duration = d.duration_ms / 1000;
+    //     const minutes = Math.floor(duration / 60);
+    //     const seconds = Math.floor(duration % 60);
+    //     return `<td>${d.name}</td><td>${d[1]}</td><td>${minutes}:${seconds}</td><td>${d.popularity}</td>`;
+    //   });
+    // // id descriptionFinal p change
+    // const p = d3.select("#descriptionFinal");
+    // // p append text
+    // p.text(
+    //   "The Beatles are one of the most influential bands of all time. They are known for their unique sound and style. This visualization shows the top 10 songs by each member of the band. The word cloud shows the top songs by each member. The size of the word is proportional to the popularity of the song."
+    // );
   }
 }
 
