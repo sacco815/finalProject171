@@ -23,3 +23,6 @@ Finally, we have an analysis of the differences between the careers of Paul McCa
 <br>Note: A few albums contain a vast majority of songs in which the writing credit is unclear or there is limited streaming data. For these albums, the last visualization has been hidden, but to revert back to the total discography for each writer after selecting an album, simply refresh the page.
 
 <br>Created by: Michael Sacco, Katherine Choi, Alfred Wahlforss
+<br>Data sourced from Kaggle and public Spotify datasets
+<br>Live webpage url: https://sacco815.github.io/finalProject171
+<br>Video demo: https://drive.google.com/file/d/1kguAXCsQ6cgCZGyjk96I6zlGxLqukw_8/view?usp=share_link
